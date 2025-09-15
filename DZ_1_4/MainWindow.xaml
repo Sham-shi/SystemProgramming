@@ -1,0 +1,57 @@
+﻿<Window
+    x:Class="DZ_1_4.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:DZ_1_4"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="MainWindow"
+    Width="800"
+    Height="500"
+    mc:Ignorable="d">
+    <StackPanel Margin="5">
+        <Label Content="Путь к файлу для поиска:" FontSize="16" />
+        <TextBox
+            Name="tbx_FilePath"
+            Height="50"
+            FontSize="14"
+            TextWrapping="Wrap" />
+        <Button
+            Name="bt_Browse"
+            Width="140"
+            Height="30"
+            Margin="0,20,0,0"
+            Click="bt_Browse_Click"
+            Content="Обзор"
+            FontSize="16" />
+        <Label
+            Margin="0,20,0,0"
+            Content="Слово для поиска:"
+            FontSize="16" />
+        <TextBox
+            Name="tbx_SearchWord"
+            Height="50"
+            FontSize="14"
+            Text="bicycle"
+            TextWrapping="Wrap" />
+        <Button
+            Name="bt_Search"
+            Width="140"
+            Height="30"
+            Margin="0,20,0,0"
+            Click="bt_Search_Click"
+            Content="Поиск"
+            FontSize="16" />
+        <Label
+            Margin="0,20,0,0"
+            Content="Результат поиска:"
+            FontSize="16" />
+        <ScrollViewer Height="130">
+            <TextBlock
+                Name="tbk_Result"
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                TextWrapping="Wrap" />
+        </ScrollViewer>
+    </StackPanel>
+</Window>

@@ -22,7 +22,7 @@ namespace DZ_3
 
         private int _min;
         private int _max;
-        private int _squareCounter;
+        private bool _isBusy;
 
         private int _factorialCounter;
         private int _maxFactorial;
@@ -32,10 +32,7 @@ namespace DZ_3
             InitializeComponent();
 
             _factorialCounter = 0;
-            _squareCounter = 2;
-
-            int.TryParse(iud_Max.Text, out _max);
-            int.TryParse(iud_Min.Text, out _min);
+            _isBusy = true;
         }
 
         private void SquaresOfNumbers(object sender)
@@ -112,6 +109,16 @@ namespace DZ_3
             bt_Start.IsEnabled = false;
             bt_FactorialStart.IsEnabled = false;
 
+            iud_Min.IsEnabled = false;
+            iud_Max.IsEnabled = false;
+
+
+            int.TryParse(iud_Max.Text, out _max);
+            if (_isBusy)
+            {
+                int.TryParse(iud_Min.Text, out _min);
+            }
+
             _tokenSource = new CancellationTokenSource();
             _thread = new Thread(SquaresOfNumbers)
             {
@@ -128,6 +135,8 @@ namespace DZ_3
             bt_Stop.IsEnabled = true;
             bt_FactorialStart.IsEnabled = true;
 
+            _isBusy = false;
+
             if (_thread != null && _tokenSource != null)
             {
                 _tokenSource.Cancel();
@@ -143,6 +152,9 @@ namespace DZ_3
             bt_Stop.IsEnabled = false;
             bt_FactorialStart.IsEnabled = true;
 
+            iud_Min.IsEnabled = true;
+            iud_Max.IsEnabled = true;
+
             if (_thread != null && _tokenSource != null)
             {
                 _tokenSource.Cancel();
@@ -151,8 +163,7 @@ namespace DZ_3
             }
 
             txbk_Squares.Text = string.Empty;
-            _min = 2;
-            _max = 1000;
+            _isBusy = true;
         }
 
         private void bt_FactorialStart_Click(object sender, RoutedEventArgs e)
@@ -161,6 +172,8 @@ namespace DZ_3
             bt_FactorialStop.IsEnabled = true;
             bt_FactorialStart.IsEnabled = false;
             bt_Start.IsEnabled = false;
+
+            iud_Total.IsEnabled = false;
 
             int.TryParse(iud_Total.Text, out _maxFactorial);
 
@@ -194,6 +207,8 @@ namespace DZ_3
             bt_FactorialPause.IsEnabled = false;
             bt_FactorialStop.IsEnabled = false;
             bt_Start.IsEnabled = true;
+
+            iud_Total.IsEnabled = true;
 
             if (_thread != null && _tokenSource != null)
             {
